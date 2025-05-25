@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout - Flavor Town Botswana</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+    h2 {
+      text-align: center;
+      color: #1d3557;
+    }
+    input {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 0.7rem;
+      margin-top: 1rem;
+      background: #1d3557;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #457b9d;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Enter Payment Details</h2>
+    <input type="text" placeholder="Card Number" id="card">
+    <input type="text" placeholder="CVV" id="cvv">
+    <input type="text" placeholder="Expiry Date (MM/YY)" id="expiry">
+    <button onclick="simulatePayment()">Pay Now</button>
+    <button onclick="window.history.back()" style="background:#e63946;margin-top:10px;">Back</button>
+  </div>
+
+  <script>
+    if (!localStorage.getItem("loggedInUser")) {
+      alert("Please login to continue.");
+      window.location.href = "login.html";
+    }
+
+    function simulatePayment() {
+      const card = document.getElementById("card").value.trim();
+      const cvv = document.getElementById("cvv").value.trim();
+      const expiry = document.getElementById("expiry").value.trim();
+
+      // Basic validation
+      const cardRegex = /^\d{16}$/; 
+      const cvvRegex = /^\d{3}$/;
+      const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+
+      if (!card || !cvv || !expiry) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      if (!cardRegex.test(card)) {
+        alert("Invalid card number. Must be 16 digits.");
+        return;
+      }
+
+      if (!cvvRegex.test(cvv)) {
+        alert("Invalid CVV. Must be 3 digits.");
+        return;
+      }
+
+      if (!expiryRegex.test(expiry)) {
+        alert("Invalid expiry date. Use MM/YY format.");
+        return;
+      }
+
+      const user = localStorage.getItem("loggedInUser");
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+      const order = {
+        user,
+        date: new Date().toLocaleString(),
+        items: cart,
+        total: `P${total.toFixed(2)}`,
+        status: "Pending"
+      };
+
+      const orders = JSON.parse(localStorage.getItem("orders")) || [];
+      orders.push(order);
+      localStorage.setItem("orders", JSON.stringify(orders));
+      localStorage.removeItem("cart");
+
+      alert("Payment successful! Order confirmed.");
+      window.location.href = "confirmation.html";
+    }
+  </script>
+</body>
+</html>

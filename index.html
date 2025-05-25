@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flavor Town Botswana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: #fff;
+      color: #333;
+    }
+
+    header {
+      background-color: #e63946;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    nav a, nav span {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    #cart-count {
+      background: #1d3557;
+      border-radius: 50%;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.8rem;
+      margin-left: 0.3rem;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2rem;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 250px;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+    }
+
+    .card p {
+      margin: 0.3rem 0;
+      color: #888;
+    }
+
+    .card button {
+      padding: 0.5rem 1rem;
+      background-color: #1d3557;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .card button:hover {
+      background-color: #457b9d;
+    }
+
+    .fallback {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ddd;
+      font-size: 2rem;
+      border-radius: 10px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Flavor Town Botswana</h1>
+    <nav>
+      <span>Hi, <script>document.write(localStorage.getItem("loggedInUser") || "Guest")</script></span>
+      <a href="cart.html">Cart<span id="cart-count">0</span></a>
+      <a href="checkout.html">Checkout</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <section class="container" id="menu">
+    <!-- Existing dishes -->
+    <div class="card">
+      <img src="images/1.jpg" alt="Cheesy Burger">
+      <h3>Cheesy Burger</h3>
+      <p>P45.00</p>
+      <button onclick="addToCart('Cheesy Burger', 45)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="images/2.jpg" alt="pizza" >
+      <h3>Margherita Pizza</h3> 
+      <p>P60.00</p>
+      <button onclick="addToCart('Margherita Pizza', 60)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="images/3.jpg" alt="chicken" >
+      <h3>Grilled Chicken</h3>
+      <p>P70.00</p>
+      <button onclick="addToCart('Grilled Chicken', 70)">Add to Cart</button>
+    </div>
+
+    <!-- Local dishes -->
+    <div class="card">
+    <img src="images/4.jpg" alt="pap and meat" >
+     <h3>Pap and Meat</h3>
+      <p>P40.00</p>
+      <button onclick="addToCart('Pap and Meat', 40)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="images/5.jpg" alt="samp" >
+      <h3>Samp</h3>
+      <p>P35.00</p>
+      <button onclick="addToCart('Samp', 35)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="images/6.jpg" alt="lentils" >
+      <h3>Lentils</h3>
+      <p>P30.00</p>
+      <button onclick="addToCart('Lentils', 30)">Add to Cart</button>
+    </div>
+
+    <!-- More existing dishes -->
+    <div class="card">
+      <img src="images/7.jpg" alt="sushi" >
+      <h3>Salmon Sushi</h3>
+      <p>P80.00</p>
+      <button onclick="addToCart('Salmon Sushi', 80)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="images/8.jpg" alt="salad" >
+      <h3>Fresh Garden Salad</h3>
+      <p>P35.00</p>
+      <button onclick="addToCart('Fresh Garden Salad', 35)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+     <img src="images/9.jpg" alt="pasta" >     
+     <h3>Italian Pasta</h3>
+      <p>P55.00</p>
+      <button onclick="addToCart('Italian Pasta', 55)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="images/11.jpg" alt="Loaded Fries" >
+      <h3>Loaded Fries</h3>
+      <p>P30.00</p>
+      <button onclick="addToCart('Loaded Fries', 30)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="images/12.jpg" alt="Beef steak" >
+      <h3>Beef Steak</h3>
+      <p>P90.00</p>
+      <button onclick="addToCart('Beef Steak', 90)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+     <img src="images/13.jpg" alt="ice cream" >
+     <h3>Vanilla Ice Cream</h3>
+      <p>P25.00</p>
+      <button onclick="addToCart('Vanilla Ice Cream', 25)">Add to Cart</button>
+    </div>
+  </section>
+
+  <script>
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById("cart-count").textContent = count;
+    }
+
+    function addToCart(name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({ name, price, quantity: 1 });
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+      alert(`${name} added to cart.`);
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "login.html";
+    }
+
+    window.onload = updateCartCount;
+  </script>
+</body>
+</html>
